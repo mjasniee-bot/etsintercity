@@ -1,79 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-<title>Aplikasi ETS Intercity </title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10243b">
+<title>ETS | Cleaning, GPC & Fumigation Portal</title>
 <style>
-
-body{
-font-family:Arial;
-background:#0f172a;
-color:white;
-text-align:center;
-padding-top:100px;
-}
-
-button{
-padding:15px 30px;
-margin:20px;
-font-size:18px;
-background:#22c55e;
-border:none;
-border-radius:8px;
-color:white;
-cursor:pointer;
-}
-
-button:hover{
-background:#16a34a;
-}
-
+:root{--navy:#10243b;--navy2:#173b55;--teal:#168b88;--mint:#a8e4d9;--ink:#172b3d;--muted:#718195;--line:#e5ebf0;--paper:#f3f6f9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(116deg,#0d2035 0%,#16445d 58%,#137f7e 100%);padding:27px max(5.5vw,24px) 83px;color:#fff}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid #ffffff18;border-radius:50%;pointer-events:none}
+.hero:before{width:470px;height:470px;right:-105px;top:-300px;box-shadow:0 0 0 45px #ffffff08,0 0 0 95px #ffffff06}
+.hero:after{width:210px;height:210px;right:18%;bottom:-175px;box-shadow:0 0 0 35px #ffffff08}
+.topbar{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo-wrap{display:flex;align-items:center;gap:17px}
+.logo{display:block;width:145px;height:auto;max-height:66px;object-fit:contain}
+.brand-copy{border-left:1px solid #ffffff45;padding-left:16px}
+.brand-copy strong{display:block;font-size:12px;letter-spacing:1.5px}
+.brand-copy span{display:block;color:#c1d6df;font-size:10px;letter-spacing:1.1px;margin-top:5px}
+.access{border:1px solid #ffffff42;border-radius:30px;padding:9px 14px;color:#d9f5ee;font-size:11px;letter-spacing:.8px;white-space:nowrap}
+.access i{display:inline-block;width:7px;height:7px;background:#67d6b4;border-radius:50%;margin-right:7px}
+.intro{position:relative;z-index:1;max-width:760px;margin-top:48px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase;color:#a9e7db}
+h1{font-size:clamp(31px,5vw,53px);line-height:1.08;letter-spacing:-1.5px;margin:13px 0}
+.intro p{font-size:15px;line-height:1.7;color:#d2e2e9;max-width:650px;margin:0}
+main{max-width:1220px;margin:-39px auto 65px;padding:0 24px;position:relative;z-index:2}
+.section{background:#fff;border:1px solid var(--line);border-radius:19px;padding:28px;margin-bottom:23px;box-shadow:0 12px 34px #17334b0c}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:21px}
+.kicker{font-size:10px;letter-spacing:1.8px;color:var(--teal);font-weight:850;text-transform:uppercase}
+h2{font-size:24px;color:var(--navy);margin:6px 0 0;letter-spacing:-.5px}
+.section-head p{font-size:12px;color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tile{height:230px;position:relative;display:block;overflow:hidden;border-radius:15px;color:#fff;text-decoration:none;background:#183c54;isolation:isolate;box-shadow:0 7px 19px #10243b17;transition:transform .28s ease,box-shadow .28s ease}
+.tile:hover,.tile:focus-visible{transform:translateY(-5px);box-shadow:0 17px 32px #10243b30;outline:none}
+.photo{position:absolute;inset:0;z-index:-2;transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .4s}
+.tile:hover .photo,.tile:focus-visible .photo{transform:scale(1.1);filter:saturate(1.12)}
+.photo:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#071827ed 0%,#0718279c 48%,#07182716 100%)}
+.clean{background:radial-gradient(circle at 78% 18%,#64c9b5 0,transparent 29%),linear-gradient(125deg,#123a55,#16868a)}
+.gpc{background:radial-gradient(circle at 78% 18%,#a4c0d4 0,transparent 27%),linear-gradient(125deg,#263b5b,#627c9d)}
+.sj{background:radial-gradient(circle at 75% 20%,#72c4d1 0,transparent 28%),linear-gradient(125deg,#143c58,#25869a)}
+.afes{background:radial-gradient(circle at 75% 20%,#8bdfb8 0,transparent 28%),linear-gradient(125deg,#17484c,#26977f)}
+.fum{background:radial-gradient(circle at 75% 20%,#a9c6d6 0,transparent 28%),linear-gradient(125deg,#293c57,#687f9a)}
+.tile-content{position:absolute;inset:0;padding:21px;display:flex;flex-direction:column;align-items:flex-start}
+.tile-icon{width:42px;height:42px;border:1px solid #ffffff62;background:#ffffff20;border-radius:12px;display:grid;place-items:center;font-size:20px;backdrop-filter:blur(7px)}
+.tile-copy{margin-top:auto;max-width:85%}
+.tag{font-size:9px;letter-spacing:1.6px;text-transform:uppercase;color:#b7eee2;font-weight:850;margin-bottom:7px}
+h3{font-size:20px;letter-spacing:-.35px;margin:0 0 7px}
+.tile p{font-size:11px;line-height:1.55;color:#e0ebef;margin:0}
+.arrow{position:absolute;right:19px;bottom:20px;width:34px;height:34px;border-radius:50%;border:1px solid #ffffff85;background:#ffffff19;display:grid;place-items:center;font-size:16px;transition:background .25s,transform .25s}
+.tile:hover .arrow{background:#ffffff36;transform:translate(2px,-2px)}
+.note{font-size:10px;color:#8794a1;margin:14px 2px 0}
+footer{text-align:center;color:#8593a1;font-size:10px;letter-spacing:1px;padding:0 18px 26px}
+@media(max-width:780px){.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}.section-head{align-items:flex-start;flex-direction:column}.tile{height:215px}}
+@media(max-width:540px){.hero{padding:22px 19px 72px}.logo{width:105px}.brand-copy{padding-left:11px}.brand-copy strong{font-size:10px}.brand-copy span{font-size:8px}.access{font-size:9px;padding:8px 10px}.intro{margin-top:36px}main{padding:0 13px}.section{padding:18px;border-radius:15px}.grid,.grid.three{grid-template-columns:1fr}.tile{height:195px}.section-head p{line-height:1.5}}
 </style>
-
 </head>
-<script>
-function myFunction() {
-  location.replace("https://train-timetable-six.vercel.app/index.html")
-}
-  /* onload="myFunction()"*/
-</script>
-
 <body>
-
-<h1>Perkhidmatan ETS & Antarabandar</h1>
-
-<div style="margin-bottom:20px">
-<table border=0 cellpadding=0 cellspacing=1 width=80%>
-  <tr>
-    <td width=20%>&nbsp;</td>
-    <td width=25%>&nbsp;</td>
-    <td width=25%>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td align=right><!--<a href="https://train-timetable-six.vercel.app/" target="_blank"><button>ETS Timetable Board</button></a>-->
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfgh1QYJfkHpQVmFmMjsou-9kmSL_K-5TUJbqCk2_WXlvbAdQ/viewform?usp=sharing&ouid=114173730787214918902" target="_blank"><button>ETS  Cleaning Form</button></td>
-    <td align=left><a href="https://datastudio.google.com/u/0/reporting/51cb899a-0225-4099-94c6-b1b4392a106a/page/p_bpuk90kjid" target="_blank"><button>ETS Cleaning Dashboard SJ</button></a></a></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td align=right></td>
-    <td align=left><a href="https://shorturl.at/fEatM" target="_blank"><button>ETS Cleaning Dashboard AFES</button></a></a></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td align=right><a href="https://docs.google.com/forms/d/e/1FAIpQLSe5COOjwWxhDPmEpbLVf6viq8KLyAGccjALPtUPyIOct8mfxA/viewform?usp=sharing&ouid=114173730787214918902" target="_blank"><button>GPC & Fumigation Form</button></a></td>
-    <td align=left><a href="https://datastudio.google.com/u/2/reporting/eb9f607a-c1b0-4ca3-95e4-5a182772c44f/page/p_s97bdq5tgd" target="_blank"><button>GPC & Fumigation</button></a></td>
-    <td></td>
-  </tr>
-<!--<a href="station-search.html"><button>Station Search</button></a>
-<a href="platform-board.html"><button>Platform Board</button></a>-->
-
-</div>
-
+<header class="hero">
+  <div class="topbar">
+    <div class="logo-wrap">
+      <img class="logo" src="/assets/logo-ets.png" alt="ETS logo">
+      <div class="brand-copy"><strong>OPERATIONS PORTAL</strong><span>CLEANING & HYGIENE MANAGEMENT</span></div>
+    </div>
+    <div class="access"><i></i>INTERNAL ACCESS</div>
+  </div>
+  <div class="intro">
+    <div class="eyebrow">ETS · Operations & Service Support</div>
+    <h1>Cleaning, GPC &<br>Fumigation Portal</h1>
+    <p>A central platform to submit operational records, monitor cleaning performance and access GPC and fumigation reports.</p>
+  </div>
+</header>
+<main>
+  <section class="section">
+    <div class="section-head"><div><div class="kicker">01 / Data submission</div><h2>Forms</h2></div><p>Submit operational records and activity reports</p></div>
+    <div class="grid">
+      <a class="tile" href="https://docs.google.com/forms/d/e/1FAIpQLSfgh1QYJfkHpQVmFmMjsou-9kmSL_K-5TUJbqCk2_WXlvbAdQ/viewform?usp=sharing&amp;ouid=114173730787214918902" target="_blank" rel="noopener noreferrer">
+        <div class="photo clean"></div><div class="tile-content"><div class="tile-icon">✦</div><div class="tile-copy"><div class="tag">Operational form</div><h3>Cleaning Form</h3><p>Record cleaning activities, inspections and operational details.</p></div><span class="arrow">↗</span></div>
+      </a>
+      <a class="tile" href="https://docs.google.com/forms/d/e/1FAIpQLSe5COOjwWxhDPmEpbLVf6viq8KLyAGccjALPtUPyIOct8mfxA/viewform" target="_blank" rel="noopener noreferrer">
+        <div class="photo gpc"></div><div class="tile-content"><div class="tile-icon">⌁</div><div class="tile-copy"><div class="tag">Specialised form</div><h3>GPC & Fumigation Form</h3><p>Submit GPC and fumigation activity details for monitoring.</p></div><span class="arrow">↗</span></div>
+      </a>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-head"><div><div class="kicker">02 / Monitoring & insights</div><h2>Dashboards</h2></div><p>Review performance and operational status</p></div>
+    <div class="grid three">
+      <a class="tile" href="https://datastudio.google.com/u/0/reporting/51cb899a-0225-4099-94c6-b1b4392a106a/page/p_bpuk90kjid" target="_blank" rel="noopener noreferrer">
+        <div class="photo sj"></div><div class="tile-content"><div class="tile-icon">▥</div><div class="tile-copy"><div class="tag">Cleaning performance</div><h3>Cleaning By SJ</h3><p>View cleaning records and performance under SJ.</p></div><span class="arrow">↗</span></div>
+      </a>
+      <a class="tile" href="https://datastudio.google.com/u/0/reporting/a38fdd5b-c870-41fe-8deb-a08f812c4b85" target="_blank" rel="noopener noreferrer">
+        <div class="photo afes"></div><div class="tile-content"><div class="tile-icon">▤</div><div class="tile-copy"><div class="tag">Cleaning performance</div><h3>Cleaning By AFES</h3><p>Monitor cleaning records and performance under AFES.</p></div><span class="arrow">↗</span></div>
+      </a>
+      <a class="tile" href="https://datastudio.google.com/u/2/reporting/eb9f607a-c1b0-4ca3-95e4-5a182772c44f/page/p_s97bdq5tgd" target="_blank" rel="noopener noreferrer">
+        <div class="photo fum"></div><div class="tile-content"><div class="tile-icon">◈</div><div class="tile-copy"><div class="tag">Specialised monitoring</div><h3>GPC & Fumigation</h3><p>Track GPC and fumigation activities in one dashboard.</p></div><span class="arrow">↗</span></div>
+      </a>
+    </div>
+    <div class="note">Select any card to open the relevant Google Form or dashboard in a new tab.</div>
+  </section>
+</main>
+<footer>ETS OPERATIONS PORTAL · CLEANING, GPC & FUMIGATION</footer>
 </body>
 </html>
